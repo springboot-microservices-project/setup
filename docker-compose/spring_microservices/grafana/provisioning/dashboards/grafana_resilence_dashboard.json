@@ -1,0 +1,1512 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "timezone": "",
+  "title": "Dashboard Springboot Microservices",
+  "uid": "DshZ5zmWk_",
+  "version": 53,
+  "description": "Resilience4j Spring Cloud Gateway Metrics",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "iteration": 1557141276207,
+  "links": [
+    
+  ],
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "refresh": false,
+  "schemaVersion": 18,
+  "style": "dark",
+  "tags": [
+    
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "application",
+        "allValue": null,
+        "current": {
+          "text": "resilience4j-demo",
+          "value": "resilience4j-demo"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(application)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Application",
+        "multi": false,
+        "options": [
+          
+        ],
+        "query": "label_values(application)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [
+          
+        ],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "name": "instance",
+        "allValue": null,
+        "current": {
+          "text": "Api Gateway",
+          "value": [
+           "host.docker.internal:8181"
+          ]
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(resilience4j_circuitbreaker_state, instance)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Instance",
+        "multi": false,
+        "options": [
+          {
+            "selected": false,
+            "text": "Api Gateway",
+            "value": "host.docker.internal:8181"
+          },
+       
+          {
+            "selected": false,
+            "text": "Auth Service",
+            "value": "host.docker.internal:8282"
+          },
+          {
+            "selected": true,
+            "text": "Master Service",
+            "value": "host.docker.internal:8383"
+          },
+          {
+            "selected": false,
+            "text": "Transaction Service",
+            "value": "host.docker.internal:8484"
+          },
+          {
+            "selected": false,
+            "text": "Inventory Service",
+            "value": "host.docker.internal:8585"
+          },
+          {
+            "selected": false,
+            "text": "Search Master Service",
+            "value": "host.docker.internal:8686"
+          },
+          {
+            "selected": false,
+            "text": "Search Transaction Service",
+            "value": "host.docker.internal:8787"
+          },
+          {
+            "selected": false,
+            "text": "Email Service",
+            "value": "host.docker.internal:8888"
+          },
+          {
+            "selected": false,
+            "text": "Report Service",
+            "value": "host.docker.internal:8989"
+          }
+        ],
+        "query": "label_values(resilience4j_circuitbreaker_state, instance)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [
+          
+        ],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "name": "circuitbreaker_name",
+        "allValue": null,
+        "current": {
+          "text": "backendA",
+          "value": "backendA"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(resilience4j_circuitbreaker_state, name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "CircuitBreaker Name",
+        "multi": false,
+        "options": [
+          
+        ],
+        "query": "label_values(resilience4j_circuitbreaker_state, name)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [
+          
+        ],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "panels": [
+        
+      ],
+      "title": "API Gateway Service (Global)",
+      "type": "row"
+    },
+    {
+      "id": 2,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#73BF69"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 1
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(150, 217, 141, 0.22)",
+        "full": false,
+        "lineColor": "#73BF69",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"200\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Success",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "id": 3,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(210, 76, 71)",
+        "rgb(210, 76, 71)",
+        "#FF0000"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 5,
+        "y": 1
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(118, 76, 71)",
+        "full": false,
+        "lineColor": "#FF0000",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"503\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Circuit Breaker",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "id": 4,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(144, 105, 162)",
+        "rgb(144, 105, 162)",
+        "rgb(144, 105, 162)"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 10,
+        "y": 1
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(85, 105, 162)",
+        "full": false,
+        "lineColor": "rgb(136, 121, 162)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"429\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Rate limmiter (Global)",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+
+
+
+
+
+
+
+
+    
+
+
+
+    {
+      "id": 5,
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 0,
+        "y": 2
+      },
+     
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "scopedVars": {
+        "circuitbreaker_name": {
+          "selected": true,
+          "text": "backendA",
+          "value": "backendA"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "resilience4j_circuitbreaker_calls_seconds_count{name=\"CB_MASTER_SERVICES\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "90th Percentile",
+          "refId": "A"
+        },
+        {
+          "expr": "resilience4j_circuitbreaker_calls_seconds_count{name=\"CB_MASTER_SERVICES\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "95th Percentile",
+          "refId": "B"
+        },
+        {
+          "expr": "resilience4j_circuitbreaker_calls_seconds_count{name=\"CB_MASTER_SERVICES\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "98th Percentile",
+          "refId": "C"
+        },
+        {
+          "expr": "resilience4j_circuitbreaker_calls_seconds_count{name=\"CB_MASTER_SERVICES\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Median",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Call duration percentiles",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "s",
+          "label": "Average duration",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	 {
+      "id": 20,
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "panels": [
+        
+      ],
+      "scopedVars": {
+        "circuitbreaker_name": {
+          "selected": true,
+          "text": "backendA",
+          "value": "backendA"
+        }
+      },
+      "title": "Auth Service",
+      "type": "row"
+    },
+	
+	
+    {
+      "id": 21,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#73BF69"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 23
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(150, 217, 141, 0.22)",
+        "full": false,
+        "lineColor": "#73BF69",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\",httpStatusCode=\"200\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Success",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "id": 22,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(210, 76, 71)",
+        "rgb(210, 76, 71)",
+        "#FF0000"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 5,
+        "y": 23
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(118, 76, 71)",
+        "full": false,
+        "lineColor": "#FF0000",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(resilience4j_circuitbreaker_calls_seconds_count{kind=\"failed\",name=\"CB_AUTH_SERVICES\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Circuit Breaker",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "id": 23,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(144, 105, 162)",
+        "rgb(144, 105, 162)",
+        "rgb(144, 105, 162)"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 10,
+        "y": 23
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(85, 105, 162)",
+        "full": false,
+        "lineColor": "rgb(136, 121, 162)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\",httpStatusCode=\"429\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Rate limmiter ",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    }
+	
+	,
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 {
+      "id": 30,
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "panels": [
+        
+      ],
+      "scopedVars": {
+        "circuitbreaker_name": {
+          "selected": true,
+          "text": "backendA",
+          "value": "backendA"
+        }
+      },
+      "title": "Master Service",
+      "type": "row"
+    },
+	
+	
+    {
+      "id": 31,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#73BF69"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 35
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(150, 217, 141, 0.22)",
+        "full": false,
+        "lineColor": "#73BF69",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\",httpStatusCode=\"200\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Success",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "id": 32,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(210, 76, 71)",
+        "rgb(210, 76, 71)",
+        "#FF0000"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 5,
+        "y": 35
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(118, 76, 71)",
+        "full": false,
+        "lineColor": "#FF0000",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(resilience4j_circuitbreaker_calls_seconds_count{kind=\"failed\",name=\"CB_MASTER_SERVICES\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Circuit Breaker",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "id": 33,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(144, 105, 162)",
+        "rgb(144, 105, 162)",
+        "rgb(144, 105, 162)"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 2,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 10,
+        "y": 35
+      },
+      "interval": null,
+      "links": [
+        
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(85, 105, 162)",
+        "full": false,
+        "lineColor": "rgb(136, 121, 162)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\",httpStatusCode=\"429\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Rate limmiter ",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+    
+	 {
+    "id": 40,
+    "collapsed": false,
+    "gridPos": {
+      "h": 1,
+      "w": 24,
+      "x": 0,
+      "y": 46
+    },
+    "panels": [
+      
+    ],
+    "scopedVars": {
+      "circuitbreaker_name": {
+        "selected": true,
+        "text": "backendA",
+        "value": "backendA"
+      }
+    },
+    "title": "Transaction Service",
+    "type": "row"
+  },
+
+
+  {
+    "id": 41,
+    "cacheTimeout": null,
+    "colorBackground": false,
+    "colorPostfix": false,
+    "colorPrefix": false,
+    "colorValue": true,
+    "colors": [
+      "#d44a3a",
+      "rgba(237, 129, 40, 0.89)",
+      "#73BF69"
+    ],
+    "datasource": "Prometheus",
+    "format": "none",
+    "gauge": {
+      "maxValue": 2,
+      "minValue": 0,
+      "show": false,
+      "thresholdLabels": false,
+      "thresholdMarkers": true
+    },
+    "gridPos": {
+      "h": 5,
+      "w": 5,
+      "x": 0,
+      "y": 47
+    },
+    "interval": null,
+    "links": [
+      
+    ],
+    "mappingType": 1,
+    "mappingTypes": [
+      {
+        "name": "value to text",
+        "value": 1
+      },
+      {
+        "name": "range to text",
+        "value": 2
+      }
+    ],
+    "maxDataPoints": 100,
+    "nullPointMode": "connected",
+    "nullText": null,
+    "postfix": "",
+    "postfixFontSize": "50%",
+    "prefix": "",
+    "prefixFontSize": "50%",
+    "rangeMaps": [
+      {
+        "from": "null",
+        "text": "N/A",
+        "to": "null"
+      }
+    ],
+    "sparkline": {
+      "fillColor": "rgba(150, 217, 141, 0.22)",
+      "full": false,
+      "lineColor": "#73BF69",
+      "show": true
+    },
+    "tableColumn": "",
+    "targets": [
+      {
+        "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\",httpStatusCode=\"200\"})",
+        "format": "time_series",
+        "instant": false,
+        "intervalFactor": 1,
+        "refId": "A"
+      }
+    ],
+    "thresholds": "0,1",
+    "timeFrom": null,
+    "timeShift": null,
+    "title": "Success",
+    "type": "singlestat",
+    "valueFontSize": "100%",
+    "valueMaps": [
+      {
+        "op": "=",
+        "text": "N/A",
+        "value": "null"
+      }
+    ],
+    "valueName": "current"
+  },
+  {
+    "id": 43,
+    "cacheTimeout": null,
+    "colorBackground": false,
+    "colorPostfix": false,
+    "colorPrefix": false,
+    "colorValue": true,
+    "colors": [
+      "rgb(210, 76, 71)",
+      "rgb(210, 76, 71)",
+      "#FF0000"
+    ],
+    "datasource": "Prometheus",
+    "format": "none",
+    "gauge": {
+      "maxValue": 2,
+      "minValue": 0,
+      "show": false,
+      "thresholdLabels": false,
+      "thresholdMarkers": true
+    },
+    "gridPos": {
+      "h": 5,
+      "w": 5,
+      "x": 5,
+      "y": 47
+    },
+    "interval": null,
+    "links": [
+      
+    ],
+    "mappingType": 1,
+    "mappingTypes": [
+      {
+        "name": "value to text",
+        "value": 1
+      },
+      {
+        "name": "range to text",
+        "value": 2
+      }
+    ],
+    "maxDataPoints": 100,
+    "nullPointMode": "connected",
+    "nullText": null,
+    "postfix": "",
+    "postfixFontSize": "50%",
+    "prefix": "",
+    "prefixFontSize": "50%",
+    "rangeMaps": [
+      {
+        "from": "null",
+        "text": "N/A",
+        "to": "null"
+      }
+    ],
+    "sparkline": {
+      "fillColor": "rgb(118, 76, 71)",
+      "full": false,
+      "lineColor": "#FF0000",
+      "show": true
+    },
+    "tableColumn": "",
+    "targets": [
+      {
+        "expr": "sum(resilience4j_circuitbreaker_calls_seconds_count{kind=\"failed\",name=\"CB_TRANSACTION_SERVICES\"})",
+        "format": "time_series",
+        "instant": false,
+        "intervalFactor": 1,
+        "refId": "A"
+      }
+    ],
+    "thresholds": "0,1",
+    "timeFrom": null,
+    "timeShift": null,
+    "title": "Circuit Breaker",
+    "type": "singlestat",
+    "valueFontSize": "100%",
+    "valueMaps": [
+      {
+        "op": "=",
+        "text": "N/A",
+        "value": "null"
+      }
+    ],
+    "valueName": "current"
+  },
+  {
+    "id": 44,
+    "cacheTimeout": null,
+    "colorBackground": false,
+    "colorPostfix": false,
+    "colorPrefix": false,
+    "colorValue": true,
+    "colors": [
+      "rgb(144, 105, 162)",
+      "rgb(144, 105, 162)",
+      "rgb(144, 105, 162)"
+    ],
+    "datasource": "Prometheus",
+    "format": "none",
+    "gauge": {
+      "maxValue": 2,
+      "minValue": 0,
+      "show": false,
+      "thresholdLabels": false,
+      "thresholdMarkers": true
+    },
+    "gridPos": {
+      "h": 5,
+      "w": 5,
+      "x": 10,
+      "y": 47
+    },
+    "interval": null,
+    "links": [
+      
+    ],
+    "mappingType": 1,
+    "mappingTypes": [
+      {
+        "name": "value to text",
+        "value": 1
+      },
+      {
+        "name": "range to text",
+        "value": 2
+      }
+    ],
+    "maxDataPoints": 100,
+    "nullPointMode": "connected",
+    "nullText": null,
+    "postfix": "",
+    "postfixFontSize": "50%",
+    "prefix": "",
+    "prefixFontSize": "50%",
+    "rangeMaps": [
+      {
+        "from": "null",
+        "text": "N/A",
+        "to": "null"
+      }
+    ],
+    "sparkline": {
+      "fillColor": "rgb(85, 105, 162)",
+      "full": false,
+      "lineColor": "rgb(136, 121, 162)",
+      "show": true
+    },
+    "tableColumn": "",
+    "targets": [
+      {
+        "expr": "spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\",httpStatusCode=\"429\"}",
+        "format": "time_series",
+        "instant": false,
+        "intervalFactor": 1,
+        "refId": "A"
+      }
+    ],
+    "thresholds": "0,1",
+    "timeFrom": null,
+    "timeShift": null,
+    "title": "Rate limmiter ",
+    "type": "singlestat",
+    "valueFontSize": "100%",
+    "valueMaps": [
+      {
+        "op": "=",
+        "text": "N/A",
+        "value": "null"
+      }
+    ],
+    "valueName": "current"
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  ]
+}

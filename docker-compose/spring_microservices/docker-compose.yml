@@ -1,0 +1,659 @@
+version: '3'
+
+services:
+
+ # add jenkins service
+ 
+ 
+ 
+  #-----------------------------------------
+  #-- DB START -----------------------------
+  #----------------------------------------- 
+  
+  # use for auth-service
+  db_auth:
+    container_name: 'spring_microservices_db_auth'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_auth'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3310
+    ports:
+      - 3310:3310
+    expose:
+      - '3310'
+    volumes:
+      - mysql_bkp_auth:/var/lib/mysql
+    networks:
+      - network      
+    
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5  
+      
+      
+  # use for master-service
+  db_master:
+    container_name: 'spring_microservices_db_master'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_master'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3311
+    ports:
+      - 3311:3311
+    expose:
+      - '3311'
+    volumes:
+      - mysql_bkp_master:/var/lib/mysql
+    networks:
+      - network
+    
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5  
+  
+      
+       
+  # use for trans-service
+  db_trans:
+    container_name: 'spring_microservices_db_trans'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_transaction'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3312
+    ports:
+      - 3312:3312
+    expose:
+      - '3312'
+    volumes:
+      - mysql_bkp_trans:/var/lib/mysql
+    networks:
+      - network  
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+    # use for inventory-service
+  db_inventory:
+    container_name: 'spring_microservices_db_inventory'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_inventory'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3313
+    ports:
+      - 3313:3313
+    expose:
+      - '3313'
+    volumes:
+      - mysql_bkp_inventory:/var/lib/mysql
+    networks:
+      - network      
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5    
+       
+  # use for report-service
+  db_report:
+    container_name: 'spring_microservices_db_report'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_report'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3314
+    ports:
+      - 3314:3314
+    expose:
+      - '3314'
+    volumes:
+      - mysql_bkp_report:/var/lib/mysql
+    networks:
+      - network  
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5    
+  
+                 
+
+       
+  # use for gateway-service       
+  redis:
+    container_name: 'spring_microservices_redis'
+    image: redis:6.2-alpine                      
+    environment:
+      REDIS_PWD: 'password123'
+     # REDIS_HOSTS: local:redis:6380
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"  
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_PWD"
+    volumes:
+      - redis:/data
+    networks:
+      - network
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+       
+  # use for schproduct-service & schtransaction-service
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+    container_name: elastic_single_node
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+      - xpack.security.enabled=false
+      #- ELASTIC_USERNAME=user
+      #- ELASTIC_PASSWORD=password
+      #- xpack.security.enabled=true
+    ports:
+      - "9200:9200"
+    volumes:
+      - elastic_bkp_data:/usr/share/elasticsearch/data
+    networks:
+      - network  
+    
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+  #-----------------------------------------
+  #-- DB END -----------------------------
+  #-----------------------------------------        
+      
+  # RABBIT MQ
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'spring_microservices_rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672        
+    environment:
+        - RABBITMQ_DEFAULT_USER:guest
+        - RABBITMQ_DEFAULT_PASS:guest
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - network   
+        
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5     
+        
+  #------------------------------------------
+  #-- APP START -----------------------------
+  #------------------------------------------     
+        
+         
+  # app auth service
+  app_auth:
+    container_name: spring_microservices_auth_service
+    image: denitiawan/springboot-microservices-auth-service:0.0.5
+    environment:           
+      APP_HOST: 'spring_microservices_auth_service'
+      APP_PORT: 8282
+
+      APP_DB_HOST: 'spring_microservices_db_auth'
+      APP_DB_PORT: 3310
+      APP_DB_USER: 'user'
+      APP_DB_PASSWORD: 'password'
+      APP_DB_NAME: 'db_auth'     
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+    ports:      
+      - '8282:8282'
+    expose:      
+      - '8282'      
+    networks:
+      - network  
+    depends_on:
+      - db_auth
+      - app_discovery
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+  # app master service
+  app_master:
+    container_name: spring_microservices_master_service
+    image: denitiawan/springboot-microservices-master-service:0.0.4
+    environment:           
+      APP_HOST: 'spring_microservices_master_service'
+      APP_PORT: 8383
+
+      APP_DB_HOST: 'spring_microservices_db_master'
+      APP_DB_PORT: 3311
+      APP_DB_USER: 'user'
+      APP_DB_PASSWORD: 'password'
+      APP_DB_NAME: 'db_master'    
+
+      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
+      APP_RABBITMQ_PORT: 5672
+      APP_RABBITMQ_USERNAME: guest
+      APP_RABBITMQ_PASSWORD: guest   
+
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka      
+      
+    ports:      
+      - '8383:8383'
+    expose:      
+      - '8383'      
+    networks:
+      - network  
+    depends_on:
+      - db_master   
+      - app_discovery
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+      
+  # app transaction service
+  app_trans:
+    container_name: spring_microservices_trans_service
+    image: denitiawan/springboot-microservices-trans-service:0.0.3
+    environment:           
+      APP_HOST: 'spring_microservices_trans_service'
+      APP_PORT: 8484
+
+      APP_DB_HOST: 'spring_microservices_db_trans'
+      APP_DB_PORT: 3312
+      APP_DB_USER: 'user'
+      APP_DB_PASSWORD: 'password'
+      APP_DB_NAME: 'db_transaction'     
+      
+      
+      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
+      APP_RABBITMQ_PORT: 5672
+      APP_RABBITMQ_USERNAME: guest
+      APP_RABBITMQ_PASSWORD: guest
+      
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+    ports:      
+      - '8484:8484'
+    expose:      
+      - '8484'      
+    networks:
+      - network  
+    depends_on:
+      - db_trans        
+      - app_discovery
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+       
+  # app inventory service
+  app_inventory:
+    container_name: spring_microservices_inventory_service
+    image: denitiawan/springboot-microservices-inventory-service:0.0.4
+    environment:           
+      APP_HOST: 'spring_microservices_inventory_service'
+      APP_PORT: 8585
+
+      APP_DB_HOST: 'spring_microservices_db_inventory'
+      APP_DB_PORT: 3313
+      APP_DB_USER: 'user'
+      APP_DB_PASSWORD: 'password'
+      APP_DB_NAME: 'db_inventory'     
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+    ports:      
+      - '8585:8585'
+    expose:      
+      - '8585'      
+    networks:
+      - network   
+    depends_on:
+      - db_inventory        
+      - app_discovery
+    
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+           
+  # app schmaster service
+  app_schmaster:
+    container_name: spring_microservices_schmaster_service
+    image: denitiawan/springboot-microservices-schmaster-service:0.0.5
+    environment:           
+      APP_HOST: 'spring_microservices_schmaster_service'
+      APP_PORT: 8686
+
+      APP_ELASTIC_HOST: 'elastic_single_node'
+      APP_ELASTIC_PORT: 9200
+      APP_ELASTIC_USER: 'user'
+      APP_ELASTIC_PASSWORD: 'password'      
+            
+      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
+      APP_RABBITMQ_PORT: 5672
+      APP_RABBITMQ_USERNAME: guest
+      APP_RABBITMQ_PASSWORD: guest
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+    ports:      
+      - '8686:8686'
+    expose:      
+      - '8686'      
+    networks:
+      - network   
+    depends_on:
+      - rabbitmq      
+      - elastic
+      - app_discovery
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+
+
+
+  # app schtransaction service (pod 1)
+  app_schtransaction:
+    container_name: spring_microservices_schtransaction_service
+    image: denitiawan/springboot-microservices-schtransaction-service:0.0.4
+    environment:           
+      APP_HOST: 'spring_microservices_schtransaction_service'
+      APP_PORT: 8787
+
+      APP_ELASTIC_HOST: 'elastic_single_node'
+      APP_ELASTIC_PORT: 9200
+      APP_ELASTIC_USER: 'user'
+      APP_ELASTIC_PASSWORD: 'password'      
+      
+      
+      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
+      APP_RABBITMQ_PORT: 5672
+      APP_RABBITMQ_USERNAME: guest
+      APP_RABBITMQ_PASSWORD: guest
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      
+    ports:      
+      - '8787:8787'
+    expose:      
+      - '8787'      
+    networks:
+      - network
+    depends_on:
+      - rabbitmq      
+      - elastic
+      - app_discovery
+    
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+   
+
+      
+      
+  # app report service
+  app_report:
+    container_name: spring_microservices_report_service
+    image: denitiawan/springboot-microservices-report-service:0.0.3
+    environment:           
+      APP_HOST: 'spring_microservices_report_service'
+      APP_PORT: 8888
+
+      APP_DB_HOST: 'spring_microservices_db_report'
+      APP_DB_PORT: 3314
+      APP_DB_USER: 'user'
+      APP_DB_PASSWORD: 'password'
+      APP_DB_NAME: 'db_report'     
+      
+      
+      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
+      APP_RABBITMQ_PORT: 5672
+      APP_RABBITMQ_USERNAME: guest
+      APP_RABBITMQ_PASSWORD: guest
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      
+      
+    ports:      
+      - '8888:8888'
+    expose:      
+      - '8888'      
+    networks:
+      - network  
+    depends_on:
+      - rabbitmq    
+      - app_discovery      
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+        
+      
+  # app email service
+  app_email:
+    container_name: spring_microservices_email_service
+    image: denitiawan/springboot-microservices-email-service:0.0.6
+    environment:           
+      APP_HOST: 'spring_microservices_email_service'
+      APP_PORT: 8989
+               
+      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
+      APP_RABBITMQ_PORT: 5672
+      APP_RABBITMQ_USERNAME: guest
+      APP_RABBITMQ_PASSWORD: guest  
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+    ports:      
+      - '8989:8989'
+    expose:      
+      - '8989'      
+    networks:
+      - network       
+    depends_on:
+      - rabbitmq
+      - app_discovery
+    
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+         
+      
+  # app api gateway service
+  app_gateway:
+    container_name: spring_microservices_gateway_service
+    image: denitiawan/springboot-microservices-gateway-service:0.0.8
+    environment:           
+      APP_HOST: 'spring_microservices_gateway_service'
+      APP_PORT: 8181
+
+      APP_REDIS_HOST: 'spring_microservices_redis'
+      APP_REDIS_PORT: 6379    
+      APP_REDIS_PASSWORD: 'password123'                        
+      
+      APP_ROUTING_SERVER_URL_AUTH: 'http://host.docker.internal:8282'
+      APP_ROUTING_SERVER_URL_MASTER: 'http://host.docker.internal:8383'
+      APP_ROUTING_SERVER_URL_TRANSACTION: 'http://host.docker.internal:8484'
+      APP_ROUTING_SERVER_URL_INVENTORY: 'http://host.docker.internal:8585'
+      APP_ROUTING_SERVER_URL_SCHMASTER: 'http://host.docker.internal:8686'
+      APP_ROUTING_SERVER_URL_SCHTRANSACTION: 'host.docker.internal:8787'
+      APP_ROUTING_SERVER_URL_REPORT: 'http://host.docker.internal:8888'
+      APP_ROUTING_SERVER_URL_EMAIL: 'http://host.docker.internal:8989'
+      
+      
+      
+      APP_DISCOVERY_HOST_NAME: host.docker.internal
+      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+    ports:      
+      - '8181:8181'
+    expose:      
+      - '8181'      
+    networks:
+      - network         
+    depends_on:    
+      - app_email
+      - app_report
+      - app_schtransaction
+      - app_schmaster
+      - app_inventory
+      - app_trans
+      - app_master
+      - app_auth
+      - rabbitmq
+      - elastic
+      - db_report
+      - db_inventory
+      - db_trans
+      - db_master
+      - db_auth
+      - redis
+      - app_discovery       
+      
+    
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5   
+      
+  # app discovery service
+  app_discovery:
+    container_name: spring_microservices_discovery_service
+    image: denitiawan/springboot-microservices-discovery-service:0.0.3
+    environment:                 
+      APP_DISCOVERY_PORT: 8761
+                    
+    ports:      
+      - '8761:8761'
+    expose:      
+      - '8761'      
+    networks:
+      - network       
+ 
+         
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5  
+      
+      
+      
+  #------------------------------------------
+  #-- APP END -------------------------------
+  #------------------------------------------
+  
+  
+  #------------------------------------------
+  #-- MONITORING START ----------------------
+  #------------------------------------------
+  
+        
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    container_name: spring_microservices_prometheus   
+    volumes:
+        - ./prometheus:/etc/prometheus
+        - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'   
+    ports:      
+      - 9090:9090
+    networks:
+      - network  
+    depends_on:
+      - app_gateway       
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5 
+  
+  grafana:
+    image: grafana/grafana:6.7.2
+    container_name: spring_microservices_grafana
+    volumes:
+      #- grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    #environment:
+      #- GF_SECURITY_ADMIN_USER=admin
+      #- GF_SECURITY_ADMIN_PASSWORD=admin
+      #- GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    networks:
+      - network
+    depends_on:
+      - prometheus       
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5 
+  
+             
+      
+networks:
+  network:
+    driver: bridge
+    
+    
+volumes:
+  prometheus_data: 
+  #grafana_data: 
+  mysql_bkp_auth:
+  mysql_bkp_master: 
+  mysql_bkp_trans:
+  mysql_bkp_inventory:
+  mysql_bkp_report:
+  elastic_bkp_data:
+  redis:
+    driver: local   
