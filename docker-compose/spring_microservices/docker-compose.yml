@@ -208,7 +208,7 @@ services:
   # app auth service
   app_auth:
     container_name: spring_microservices_auth_service
-    image: denitiawan/springboot-microservices-auth-service:0.0.5
+    image: denitiawan/springboot-microservices-auth-service:latest
     environment:           
       APP_HOST: 'spring_microservices_auth_service'
       APP_PORT: 8282
@@ -240,7 +240,7 @@ services:
   # app master service
   app_master:
     container_name: spring_microservices_master_service
-    image: denitiawan/springboot-microservices-master-service:0.0.4
+    image: denitiawan/springboot-microservices-master-service:latest
     environment:           
       APP_HOST: 'spring_microservices_master_service'
       APP_PORT: 8383
@@ -278,7 +278,7 @@ services:
   # app transaction service
   app_trans:
     container_name: spring_microservices_trans_service
-    image: denitiawan/springboot-microservices-trans-service:0.0.3
+    image: denitiawan/springboot-microservices-trans-service:latest
     environment:           
       APP_HOST: 'spring_microservices_trans_service'
       APP_PORT: 8484
@@ -318,7 +318,7 @@ services:
   # app inventory service
   app_inventory:
     container_name: spring_microservices_inventory_service
-    image: denitiawan/springboot-microservices-inventory-service:0.0.4
+    image: denitiawan/springboot-microservices-inventory-service:latest
     environment:           
       APP_HOST: 'spring_microservices_inventory_service'
       APP_PORT: 8585
@@ -351,7 +351,7 @@ services:
   # app schmaster service
   app_schmaster:
     container_name: spring_microservices_schmaster_service
-    image: denitiawan/springboot-microservices-schmaster-service:0.0.5
+    image: denitiawan/springboot-microservices-schmaster-service:latest
     environment:           
       APP_HOST: 'spring_microservices_schmaster_service'
       APP_PORT: 8686
@@ -390,7 +390,7 @@ services:
   # app schtransaction service (pod 1)
   app_schtransaction:
     container_name: spring_microservices_schtransaction_service
-    image: denitiawan/springboot-microservices-schtransaction-service:0.0.4
+    image: denitiawan/springboot-microservices-schtransaction-service:latest
     environment:           
       APP_HOST: 'spring_microservices_schtransaction_service'
       APP_PORT: 8787
@@ -433,7 +433,7 @@ services:
   # app report service
   app_report:
     container_name: spring_microservices_report_service
-    image: denitiawan/springboot-microservices-report-service:0.0.3
+    image: denitiawan/springboot-microservices-report-service:latest
     environment:           
       APP_HOST: 'spring_microservices_report_service'
       APP_PORT: 8888
@@ -475,7 +475,7 @@ services:
   # app email service
   app_email:
     container_name: spring_microservices_email_service
-    image: denitiawan/springboot-microservices-email-service:0.0.6
+    image: denitiawan/springboot-microservices-email-service:latest
     environment:           
       APP_HOST: 'spring_microservices_email_service'
       APP_PORT: 8989
@@ -507,7 +507,7 @@ services:
   # app api gateway service
   app_gateway:
     container_name: spring_microservices_gateway_service
-    image: denitiawan/springboot-microservices-gateway-service:0.0.8
+    image: denitiawan/springboot-microservices-gateway-service:latest
     environment:           
       APP_HOST: 'spring_microservices_gateway_service'
       APP_PORT: 8181
@@ -564,7 +564,7 @@ services:
   # app discovery service
   app_discovery:
     container_name: spring_microservices_discovery_service
-    image: denitiawan/springboot-microservices-discovery-service:0.0.3
+    image: denitiawan/springboot-microservices-discovery-service:latest
     environment:                 
       APP_DISCOVERY_PORT: 8761
                     
