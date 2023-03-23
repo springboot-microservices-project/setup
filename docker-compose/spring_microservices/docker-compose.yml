@@ -12,7 +12,7 @@ services:
   
   # use for auth-service
   db_auth:
-    container_name: 'spring_microservices_db_auth'
+    container_name: 'db_auth'
     image: mysql:5.7    
     environment:
       MYSQL_DATABASE: 'db_auth'      
@@ -36,7 +36,7 @@ services:
       
   # use for master-service
   db_master:
-    container_name: 'spring_microservices_db_master'
+    container_name: 'db_master'
     image: mysql:5.7    
     environment:
       MYSQL_DATABASE: 'db_master'      
@@ -61,7 +61,7 @@ services:
        
   # use for trans-service
   db_trans:
-    container_name: 'spring_microservices_db_trans'
+    container_name: 'db_trans'
     image: mysql:5.7    
     environment:
       MYSQL_DATABASE: 'db_transaction'      
@@ -84,7 +84,7 @@ services:
       
     # use for inventory-service
   db_inventory:
-    container_name: 'spring_microservices_db_inventory'
+    container_name: 'db_inventory'
     image: mysql:5.7    
     environment:
       MYSQL_DATABASE: 'db_inventory'      
@@ -107,7 +107,7 @@ services:
        
   # use for report-service
   db_report:
-    container_name: 'spring_microservices_db_report'
+    container_name: 'db_report'
     image: mysql:5.7    
     environment:
       MYSQL_DATABASE: 'db_report'      
@@ -133,7 +133,7 @@ services:
        
   # use for gateway-service       
   redis:
-    container_name: 'spring_microservices_redis'
+    container_name: 'redis'
     image: redis:6.2-alpine                      
     environment:
       REDIS_PWD: 'password123'
@@ -183,7 +183,7 @@ services:
   # RABBIT MQ
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: 'spring_microservices_rabbitmq'
+    container_name: 'rabbitmq'
     ports:
         - 5672:5672
         - 15672:15672        
@@ -207,21 +207,27 @@ services:
          
   # app auth service
   app_auth:
-    container_name: spring_microservices_auth_service
+    container_name: auth_service
     image: denitiawan/springboot-microservices-auth-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_auth_service'
-      APP_PORT: 8282
+      SMP_AUTH_HOST: 'auth_service'
+      SMP_AUTH_PORT: 8282
 
-      APP_DB_HOST: 'spring_microservices_db_auth'
-      APP_DB_PORT: 3310
-      APP_DB_USER: 'user'
-      APP_DB_PASSWORD: 'password'
-      APP_DB_NAME: 'db_auth'     
+      SMP_AUTH_DB_HOST: 'db_auth'
+      SMP_AUTH_DB_PORT: 3310
+      SMP_AUTH_DB_USER: 'user'
+      SMP_AUTH_DB_PASSWORD: 'password'
+      SMP_AUTH_DB_NAME: 'db_auth'     
+      
+      SMP_REDIS_HOST: 'redis'
+      SMP_REDIS_PORT: 6379    
+      SMP_REDIS_PASSWORD: 'password123'  
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8282:8282'
@@ -239,26 +245,28 @@ services:
       
   # app master service
   app_master:
-    container_name: spring_microservices_master_service
+    container_name: master_service
     image: denitiawan/springboot-microservices-master-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_master_service'
-      APP_PORT: 8383
+      SMP_MST_HOST: 'master_service'
+      SMP_MST_PORT: 8383
 
-      APP_DB_HOST: 'spring_microservices_db_master'
-      APP_DB_PORT: 3311
-      APP_DB_USER: 'user'
-      APP_DB_PASSWORD: 'password'
-      APP_DB_NAME: 'db_master'    
+      SMP_MST_DB_HOST: 'db_master'
+      SMP_MST_DB_PORT: 3311
+      SMP_MST_DB_USER: 'user'
+      SMP_MST_DB_PASSWORD: 'password'
+      SMP_MST_DB_NAME: 'db_master'    
 
-      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
-      APP_RABBITMQ_PORT: 5672
-      APP_RABBITMQ_USERNAME: guest
-      APP_RABBITMQ_PASSWORD: guest   
+      SMP_RABBITMQ_HOST: 'rabbitmq'
+      SMP_RABBITMQ_PORT: 5672
+      SMP_RABBITMQ_USERNAME: guest
+      SMP_RABBITMQ_PASSWORD: guest   
 
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka      
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka     
+
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'      
       
     ports:      
       - '8383:8383'
@@ -277,28 +285,30 @@ services:
       
   # app transaction service
   app_trans:
-    container_name: spring_microservices_trans_service
+    container_name: trans_service
     image: denitiawan/springboot-microservices-trans-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_trans_service'
-      APP_PORT: 8484
+      SMP_TRS_HOST: 'trans_service'
+      SMP_TRS_PORT: 8484
 
-      APP_DB_HOST: 'spring_microservices_db_trans'
-      APP_DB_PORT: 3312
-      APP_DB_USER: 'user'
-      APP_DB_PASSWORD: 'password'
-      APP_DB_NAME: 'db_transaction'     
+      SMP_TRS_DB_HOST: 'db_trans'
+      SMP_TRS_DB_PORT: 3312
+      SMP_TRS_DB_USER: 'user'
+      SMP_TRS_DB_PASSWORD: 'password'
+      SMP_TRS_DB_NAME: 'db_transaction'     
       
       
-      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
-      APP_RABBITMQ_PORT: 5672
-      APP_RABBITMQ_USERNAME: guest
-      APP_RABBITMQ_PASSWORD: guest
+      SMP_RABBITMQ_HOST: 'rabbitmq'
+      SMP_RABBITMQ_PORT: 5672
+      SMP_RABBITMQ_USERNAME: guest
+      SMP_RABBITMQ_PASSWORD: guest
       
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8484:8484'
@@ -317,21 +327,23 @@ services:
        
   # app inventory service
   app_inventory:
-    container_name: spring_microservices_inventory_service
+    container_name: inventory_service
     image: denitiawan/springboot-microservices-inventory-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_inventory_service'
-      APP_PORT: 8585
+      SMP_INV_HOST: 'inventory_service'
+      SMP_INV_PORT: 8585
 
-      APP_DB_HOST: 'spring_microservices_db_inventory'
-      APP_DB_PORT: 3313
-      APP_DB_USER: 'user'
-      APP_DB_PASSWORD: 'password'
-      APP_DB_NAME: 'db_inventory'     
+      SMP_INV_DB_HOST: 'db_inventory'
+      SMP_INV_DB_PORT: 3313
+      SMP_INV_DB_USER: 'user'
+      SMP_INV_DB_PASSWORD: 'password'
+      SMP_INV_DB_NAME: 'db_inventory'     
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8585:8585'
@@ -350,25 +362,27 @@ services:
            
   # app schmaster service
   app_schmaster:
-    container_name: spring_microservices_schmaster_service
+    container_name: schmaster_service
     image: denitiawan/springboot-microservices-schmaster-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_schmaster_service'
-      APP_PORT: 8686
+      SMP_SCHMST_HOST: 'schmaster_service'
+      SMP_SCHMST_PORT: 8686
 
-      APP_ELASTIC_HOST: 'elastic_single_node'
-      APP_ELASTIC_PORT: 9200
-      APP_ELASTIC_USER: 'user'
-      APP_ELASTIC_PASSWORD: 'password'      
+      SMP_ELASTIC_HOST: 'elastic_single_node'
+      SMP_ELASTIC_PORT: 9200
+      SMP_ELASTIC_USER: 'user'
+      SMP_ELASTIC_PASSWORD: 'password'      
             
-      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
-      APP_RABBITMQ_PORT: 5672
-      APP_RABBITMQ_USERNAME: guest
-      APP_RABBITMQ_PASSWORD: guest
+      SMP_RABBITMQ_HOST: 'rabbitmq'
+      SMP_RABBITMQ_PORT: 5672
+      SMP_RABBITMQ_USERNAME: guest
+      SMP_RABBITMQ_PASSWORD: guest
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8686:8686'
@@ -389,27 +403,28 @@ services:
 
   # app schtransaction service (pod 1)
   app_schtransaction:
-    container_name: spring_microservices_schtransaction_service
+    container_name: schtransaction_service
     image: denitiawan/springboot-microservices-schtransaction-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_schtransaction_service'
-      APP_PORT: 8787
+      SMP_SCHTRS_HOST: 'schtransaction_service'
+      SMP_SCHTRS_PORT: 8787
 
-      APP_ELASTIC_HOST: 'elastic_single_node'
-      APP_ELASTIC_PORT: 9200
-      APP_ELASTIC_USER: 'user'
-      APP_ELASTIC_PASSWORD: 'password'      
+      SMP_ELASTIC_HOST: 'elastic_single_node'
+      SMP_ELASTIC_PORT: 9200
+      SMP_ELASTIC_USER: 'user'
+      SMP_ELASTIC_PASSWORD: 'password'      
       
       
-      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
-      APP_RABBITMQ_PORT: 5672
-      APP_RABBITMQ_USERNAME: guest
-      APP_RABBITMQ_PASSWORD: guest
+      SMP_RABBITMQ_HOST: 'rabbitmq'
+      SMP_RABBITMQ_PORT: 5672
+      SMP_RABBITMQ_USERNAME: guest
+      SMP_RABBITMQ_PASSWORD: guest
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
       
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8787:8787'
@@ -432,29 +447,29 @@ services:
       
   # app report service
   app_report:
-    container_name: spring_microservices_report_service
+    container_name: report_service
     image: denitiawan/springboot-microservices-report-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_report_service'
-      APP_PORT: 8888
+      SMP_REPORT_HOST: 'report_service'
+      SMP_REPORT_PORT: 8888
 
-      APP_DB_HOST: 'spring_microservices_db_report'
-      APP_DB_PORT: 3314
-      APP_DB_USER: 'user'
-      APP_DB_PASSWORD: 'password'
-      APP_DB_NAME: 'db_report'     
+      SMP_REPORT_DB_HOST: 'db_report'
+      SMP_REPORT_DB_PORT: 3314
+      SMP_REPORT_DB_USER: 'user'
+      SMP_REPORT_DB_PASSWORD: 'password'
+      SMP_REPORT_DB_NAME: 'db_report'     
       
       
-      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
-      APP_RABBITMQ_PORT: 5672
-      APP_RABBITMQ_USERNAME: guest
-      APP_RABBITMQ_PASSWORD: guest
+      SMP_RABBITMQ_HOST: 'rabbitmq'
+      SMP_RABBITMQ_PORT: 5672
+      SMP_RABBITMQ_USERNAME: guest
+      SMP_RABBITMQ_PASSWORD: guest
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
       
-      
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8888:8888'
@@ -474,20 +489,22 @@ services:
       
   # app email service
   app_email:
-    container_name: spring_microservices_email_service
+    container_name: email_service
     image: denitiawan/springboot-microservices-email-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_email_service'
-      APP_PORT: 8989
+      SMP_EMAIL_HOST: 'email_service'
+      SMP_EMAIL_PORT: 8989
                
-      APP_RABBITMQ_HOST: 'spring_microservices_rabbitmq'
-      APP_RABBITMQ_PORT: 5672
-      APP_RABBITMQ_USERNAME: guest
-      APP_RABBITMQ_PASSWORD: guest  
+      SMP_RABBITMQ_HOST: 'rabbitmq'
+      SMP_RABBITMQ_PORT: 5672
+      SMP_RABBITMQ_USERNAME: guest
+      SMP_RABBITMQ_PASSWORD: guest  
       
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      
+      SMP_CORS_MICROSERVICES_ALLOW_ORIGIN: 'http://localhost:8181'
       
     ports:      
       - '8989:8989'
@@ -506,29 +523,37 @@ services:
       
   # app api gateway service
   app_gateway:
-    container_name: spring_microservices_gateway_service
+    container_name: gateway_service
     image: denitiawan/springboot-microservices-gateway-service:latest
     environment:           
-      APP_HOST: 'spring_microservices_gateway_service'
-      APP_PORT: 8181
+      SMP_GW_HOST: 'gateway_service'
+      SMP_GW_PORT: 8181
 
-      APP_REDIS_HOST: 'spring_microservices_redis'
-      APP_REDIS_PORT: 6379    
-      APP_REDIS_PASSWORD: 'password123'                        
+      SMP_REDIS_HOST: 'redis'
+      SMP_REDIS_PORT: 6379    
+      SMP_REDIS_PASSWORD: 'password123'                        
       
-      APP_ROUTING_SERVER_URL_AUTH: 'http://host.docker.internal:8282'
-      APP_ROUTING_SERVER_URL_MASTER: 'http://host.docker.internal:8383'
-      APP_ROUTING_SERVER_URL_TRANSACTION: 'http://host.docker.internal:8484'
-      APP_ROUTING_SERVER_URL_INVENTORY: 'http://host.docker.internal:8585'
-      APP_ROUTING_SERVER_URL_SCHMASTER: 'http://host.docker.internal:8686'
-      APP_ROUTING_SERVER_URL_SCHTRANSACTION: 'host.docker.internal:8787'
-      APP_ROUTING_SERVER_URL_REPORT: 'http://host.docker.internal:8888'
-      APP_ROUTING_SERVER_URL_EMAIL: 'http://host.docker.internal:8989'
+      SMP_GW_ROUTING_SERVER_URL_AUTH: 'http://host.docker.internal:8282'
+      SMP_GW_ROUTING_SERVER_URL_MASTER: 'http://host.docker.internal:8383'
+      SMP_GW_ROUTING_SERVER_URL_TRANSACTION: 'http://host.docker.internal:8484'
+      SMP_GW_ROUTING_SERVER_URL_INVENTORY: 'http://host.docker.internal:8585'
+      SMP_GW_ROUTING_SERVER_URL_SCHMASTER: 'http://host.docker.internal:8686'
+      SMP_GW_ROUTING_SERVER_URL_SCHTRANSACTION: 'host.docker.internal:8787'
+      SMP_GW_ROUTING_SERVER_URL_REPORT: 'http://host.docker.internal:8888'
+      SMP_GW_ROUTING_SERVER_URL_EMAIL: 'http://host.docker.internal:8989'              
+      
+      SMP_DISCOVERY_HOST_NAME: host.docker.internal
+      SMP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+            
+      SMP_CORS_GATEWAY_ALLOW_ORIGIN_FRONTEND: 'http://localhost:3006'
+      SMP_CORS_GATEWAY_ALLOW_ORIGIN_PROMETHEUS: 'http://host.docker.internal:9090'
       
       
+      SMP_GW_RATE_LIMMITER_REQUEST_IN_SECOND_MIN: 1
+      SMP_GW_RATE_LIMMITER_REQUEST_IN_SECOND_MAX: 3
       
-      APP_DISCOVERY_HOST_NAME: host.docker.internal
-      APP_DISCOVERY_URL: http://host.docker.internal:8761/eureka
+      SMP_GW_CIRCUIT_BREAKER_DURATION_IN_SECOND_MAX: 5
+            
       
     ports:      
       - '8181:8181'
@@ -563,10 +588,10 @@ services:
       
   # app discovery service
   app_discovery:
-    container_name: spring_microservices_discovery_service
+    container_name: discovery_service
     image: denitiawan/springboot-microservices-discovery-service:latest
     environment:                 
-      APP_DISCOVERY_PORT: 8761
+      SMP_DISCOVERY_PORT: 8761
                     
     ports:      
       - '8761:8761'
@@ -594,10 +619,10 @@ services:
         
   prometheus:
     image: prom/prometheus:v2.17.1
-    container_name: spring_microservices_prometheus   
+    container_name: prometheus   
     volumes:
         - ./prometheus:/etc/prometheus
-        - prometheus_data:/prometheus
+        #- prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -618,7 +643,7 @@ services:
   
   grafana:
     image: grafana/grafana:6.7.2
-    container_name: spring_microservices_grafana
+    container_name: grafana
     volumes:
       #- grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -638,7 +663,41 @@ services:
     mem_limit: 512m
     mem_reservation: 128M
     cpus: 0.5 
-  
+
+  web:
+    container_name: web
+    image: denitiawan/springboot-microservices-web:latest
+    ports:      
+      - 3006:3000       
+    networks:
+      - network
+    volumes:
+      - web_node_modules:/app/node_modules      
+    depends_on:
+      - app_email
+      - app_report
+      - app_schtransaction
+      - app_schmaster
+      - app_inventory
+      - app_trans
+      - app_master
+      - app_auth
+      - rabbitmq
+      - elastic
+      - db_report
+      - db_inventory
+      - db_trans
+      - db_master
+      - db_auth
+      - redis
+      - app_discovery 
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5  
+    
+    
+    
              
       
 networks:
@@ -647,7 +706,7 @@ networks:
     
     
 volumes:
-  prometheus_data: 
+  #prometheus_data: 
   #grafana_data: 
   mysql_bkp_auth:
   mysql_bkp_master: 
@@ -657,3 +716,5 @@ volumes:
   elastic_bkp_data:
   redis:
     driver: local   
+    
+  web_node_modules:  
