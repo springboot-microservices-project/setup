@@ -1,0 +1,1584 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:7",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Dashboard Springboot Microservice : Counter",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [
+    {
+      "$$hashKey": "object:187",
+      "asDropdown": true,
+      "icon": "dashboard",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Gauge",
+      "tooltip": "",
+      "type": "link",
+      "url": "http://localhost:3000/d/GBZfHKBVk/dashboard-sm-gauge"
+    },
+    {
+      "$$hashKey": "object:246",
+      "icon": "dashboard",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "title": "Histogram",
+      "type": "link",
+      "url": "http://localhost:3000/d/vauSDFB4k/dashboard-springboot-microservice-histogram?orgId=1"
+    }
+  ],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "panels": [],
+      "title": "Counter API Gateway",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "the APIs is success ",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 1
+      },
+      "id": 16,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#73BF69",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "200 : SUCCESS",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#F2495C",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "the request body is Invalid argument (invalid request payload)  when access the API ",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 3,
+        "y": 1
+      },
+      "id": 17,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#F2495C",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "400 : BAD REQUEST",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#B877D9",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "the username or password dont have credential for access the application",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 7,
+        "y": 1
+      },
+      "id": 18,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#B877D9",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "401 : UNAUTHORIZE",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#FADE2A",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "the request token dont have permission for access the API",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 11,
+        "y": 1
+      },
+      "id": 19,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#FADE2A",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "403 : FORBIDDEN",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "rgb(122, 106, 0)",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "CORS : http method is not allowed by backend server",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 14,
+        "y": 1
+      },
+      "id": 23,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:82",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:83",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(122, 106, 0)",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "405 : METHOD NOT ALLOWED",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:85",
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#FF9830",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "Too Many Request",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 19,
+        "y": 1
+      },
+      "id": 20,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#FF9830",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "429 : RATE LIMMITER",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#F2495C",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "Internal Server Error",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 7,
+        "y": 5
+      },
+      "id": 21,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#F2495C",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "500 : INTERNAL SERVER ERROR",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#F2495C",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "description": "Too long wait time out",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 12,
+        "y": 5
+      },
+      "id": 22,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#F2495C",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "503 : CIRCUIT BREAKER",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Counter Microservices",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 24,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8282\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AUTH SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 25,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8383\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "MASTER SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 26,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8484\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TRANSACTION SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 27,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "yellow",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8585\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "INVENTORY SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 28,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(42, 213, 250)",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8686\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "SEARCH MASTER SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 31,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgb(255, 48, 147)",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8787\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "SEARCH TRANSACTION SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 30,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8888\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "REPORT SERVICE",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 29,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"200\"})",
+          "interval": "",
+          "legendFormat": "Success",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"400\"})",
+          "interval": "",
+          "legendFormat": "Bad request",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"401\"})",
+          "interval": "",
+          "legendFormat": "UnAuthorize",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"403\"})",
+          "interval": "",
+          "legendFormat": "Forbidden",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"405\"})",
+          "interval": "",
+          "legendFormat": "Method not allowed",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"429\"})",
+          "interval": "",
+          "legendFormat": "Rate Limmiter",
+          "refId": "F"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"500\"})",
+          "interval": "",
+          "legendFormat": "Internal Server Error",
+          "refId": "G"
+        },
+        {
+          "expr": "sum(spring_cloud_gateway_requests_seconds_count{routeUri=\"http://host.docker.internal:8989\", httpStatusCode=\"503\"})",
+          "interval": "",
+          "legendFormat": "Circuit Breaker",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "EMAIL SERVICE",
+      "type": "stat"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "2s",
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Dashboard Springboot Microservice : Counter",
+  "uid": "DgRxAvfVz",
+  "variables": {
+    "list": []
+  },
+  "version": 52
+}
