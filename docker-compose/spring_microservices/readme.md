@@ -1,25 +1,25 @@
-## Run docker compose
+### Run docker compose
 `docker-compose up -d`
 
 
-## Select all image success to download
+### Select all image success to download
 `docker image ls "denitiawan/springboot-microservices-*"`
 
 
-## Stop docker compose`
+### Stop docker compose`
 `docker-compose stop`
 
 
-## Remove docker compose
+### Remove docker compose
 `docker-compose rm`
-`type Y`
 
 
-## Removes all volume from this project
-docker volume prune
+
+### Removes all volume from this project
+`docker volume prune`
 
 
-## Remove all image from repository denitiawan/springboot....
+### Remove all image from repository denitiawan/springboot....
 docker image rm  denitiawan/springboot-microservices-discovery-service:latest
 docker image rm  denitiawan/springboot-microservices-gateway-service:latest
 docker image rm denitiawan/springboot-microservices-auth-service:latest
