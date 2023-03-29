@@ -1,6 +1,9 @@
 global:
-  scrape_interval:     5s # Default is every 1 minute.
-  evaluation_interval: 5s # Evaluate rules every 5 seconds. The default is every 1 minute.
+  # Default is every 1 minute.
+  scrape_interval:     15s 
+  
+  # Evaluate rules every 5 seconds. The default is every 1 minute.
+  evaluation_interval: 30s 
 
 rule_files:
 # - "first_rules.yml"
@@ -14,7 +17,7 @@ scrape_configs:
 
   - job_name: 'scrape_gateway_service'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 5s
+    #scrape_interval: 15s
     static_configs:
     # refer system ip address rather that localhost / host.docker.internal for  docker container     
       - targets: ['host.docker.internal:8181'] 
