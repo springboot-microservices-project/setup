@@ -52,6 +52,10 @@ services:
       - mysql_bkp_master:/var/lib/mysql
     networks:
       - network
+      
+    depends_on:
+    - db_auth
+     
     
     mem_limit: 512m
     mem_reservation: 128M
@@ -77,6 +81,9 @@ services:
       - mysql_bkp_trans:/var/lib/mysql
     networks:
       - network  
+      
+    depends_on:
+      - db_master  
       
     mem_limit: 512m
     mem_reservation: 128M
@@ -122,7 +129,12 @@ services:
     volumes:
       - mysql_bkp_report:/var/lib/mysql
     networks:
-      - network  
+      - network
+
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory       
       
     mem_limit: 512m
     mem_reservation: 128M
@@ -147,6 +159,12 @@ services:
       - redis:/data
     networks:
       - network
+
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report      
       
     mem_limit: 512m
     mem_reservation: 128M
@@ -171,6 +189,14 @@ services:
       - elastic_bkp_data:/usr/share/elasticsearch/data
     networks:
       - network  
+      
+      
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis    
     
     mem_limit: 512m
     mem_reservation: 128M
@@ -196,9 +222,91 @@ services:
     networks:
         - network   
         
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis
+      - elastic      
+        
     mem_limit: 512m
     mem_reservation: 128M
     cpus: 0.5     
+    
+    
+    
+  #------------------------------------------
+  #-- MONITORING START ----------------------
+  #------------------------------------------
+  
+        
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    container_name: prometheus   
+    volumes:
+        - ./prometheus:/etc/prometheus
+        #- prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'   
+    ports:      
+      - 9090:9090
+    networks:
+      
+      - network
+      
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis
+      - elastic 
+      - rabbitmq      
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5 
+  
+  grafana:
+    image: grafana/grafana:6.7.2
+    container_name: grafana
+    volumes:
+      #- grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    #environment:
+      #- GF_SECURITY_ADMIN_USER=admin
+      #- GF_SECURITY_ADMIN_PASSWORD=admin
+      #- GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    networks:
+      - network
+
+
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis
+      - elastic 
+      - rabbitmq   
+      - prometheus      
+      
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5 
+
+ 
+    
              
       
 networks:
@@ -216,4 +324,4 @@ volumes:
   redis:
     driver: local   
     
-  web_node_modules:  
+  
