@@ -43,7 +43,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
   # app master service
   app_master:
@@ -83,7 +83,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
       
   # app transaction service
@@ -126,7 +126,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
        
   # app inventory service
@@ -162,7 +162,7 @@ services:
     
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
            
   # app schmaster service
@@ -202,7 +202,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
 
 
 
@@ -244,7 +244,7 @@ services:
     
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
    
 
@@ -289,7 +289,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
         
       
@@ -325,7 +325,7 @@ services:
     
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
          
          
   #------------------------------------------
@@ -389,7 +389,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
   # app discovery service
   app_discovery:
@@ -408,7 +408,7 @@ services:
          
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2 
+    cpus: 0.1 
       
       
       
@@ -442,7 +442,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2 
+    cpus: 0.1 
     
   #--- FRONT END BLOCKED (BY CORS)-------------------
   web_3007:
@@ -469,7 +469,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2 
+    cpus: 0.1 
     
              
       

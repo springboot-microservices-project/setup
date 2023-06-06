@@ -31,7 +31,7 @@ services:
     
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
       
       
   # use for master-service
@@ -59,7 +59,7 @@ services:
     
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2  
+    cpus: 0.1  
   
       
        
@@ -87,7 +87,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2   
+    cpus: 0.1   
       
     # use for inventory-service
   db_inventory:
@@ -110,7 +110,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2    
+    cpus: 0.1    
        
   # use for report-service
   db_report:
@@ -138,7 +138,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2    
+    cpus: 0.1    
   
                  
 
@@ -168,7 +168,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2   
+    cpus: 0.1   
       
        
   # use for schproduct-service & schtransaction-service
@@ -200,7 +200,7 @@ services:
     
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2   
+    cpus: 0.1   
       
   #-----------------------------------------
   #-- DB END -----------------------------
@@ -232,7 +232,7 @@ services:
         
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2     
+    cpus: 0.1     
     
     
     
@@ -271,7 +271,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2 
+    cpus: 0.1 
   
   grafana:
     image: grafana/grafana:6.7.2
@@ -303,7 +303,7 @@ services:
       
     mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.2 
+    cpus: 0.1 
 
  
     
