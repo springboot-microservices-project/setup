@@ -41,9 +41,9 @@ services:
     depends_on:      
       - app_discovery
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
   # app master service
   app_master:
@@ -81,9 +81,9 @@ services:
     depends_on:      
       - app_discovery
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
       
   # app transaction service
@@ -124,9 +124,9 @@ services:
     depends_on:      
       - app_discovery
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
        
   # app inventory service
@@ -160,9 +160,9 @@ services:
     depends_on:      
       - app_discovery
     
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
            
   # app schmaster service
@@ -200,9 +200,9 @@ services:
     depends_on:      
       - app_discovery
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
 
 
 
@@ -242,9 +242,9 @@ services:
     depends_on:      
       - app_discovery
     
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
    
 
@@ -287,9 +287,9 @@ services:
     depends_on:      
       - app_discovery      
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
         
       
@@ -323,9 +323,9 @@ services:
     depends_on:     
       - app_discovery
     
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
          
          
   #------------------------------------------
@@ -387,9 +387,9 @@ services:
       
     
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2  
       
   # app discovery service
   app_discovery:
@@ -406,9 +406,9 @@ services:
       - network       
  
          
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5  
+    cpus: 0.2 
       
       
       
@@ -420,9 +420,9 @@ services:
   #--- FRONT END ACCEPTED (BY CORS)-------------------
   web:
     container_name: smp_web
-    image: denitiawan/springboot-microservices-web:latest
+    image: denitiawan/springboot-microservices-web:latest-prod
     ports:      
-      - 3006:3000       
+      - 80:3000       
     networks:
       
       - network
@@ -440,14 +440,14 @@ services:
       - app_auth      
       - app_discovery 
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5  
+    cpus: 0.2 
     
   #--- FRONT END BLOCKED (BY CORS)-------------------
   web_3007:
     container_name: smp_web_3007
-    image: denitiawan/springboot-microservices-web:latest
+    image: denitiawan/springboot-microservices-web:latest-prod
     ports:      
       - 3007:3000       
     networks:
@@ -467,9 +467,9 @@ services:
       - app_auth      
       - app_discovery 
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5  
+    cpus: 0.2 
     
              
       

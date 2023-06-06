@@ -29,9 +29,9 @@ services:
     networks:
       - network      
     
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5  
+    cpus: 0.2  
       
       
   # use for master-service
@@ -57,9 +57,9 @@ services:
     - db_auth
      
     
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5  
+    cpus: 0.2  
   
       
        
@@ -85,9 +85,9 @@ services:
     depends_on:
       - db_master  
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2   
       
     # use for inventory-service
   db_inventory:
@@ -108,9 +108,9 @@ services:
     networks:
       - network      
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5    
+    cpus: 0.2    
        
   # use for report-service
   db_report:
@@ -136,9 +136,9 @@ services:
       - db_master
       - db_inventory       
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5    
+    cpus: 0.2    
   
                  
 
@@ -166,9 +166,9 @@ services:
       - db_inventory
       - db_report      
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2   
       
        
   # use for schproduct-service & schtransaction-service
@@ -198,9 +198,9 @@ services:
       - db_report
       - redis    
     
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5   
+    cpus: 0.2   
       
   #-----------------------------------------
   #-- DB END -----------------------------
@@ -230,9 +230,9 @@ services:
       - redis
       - elastic      
         
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5     
+    cpus: 0.2     
     
     
     
@@ -269,9 +269,9 @@ services:
       - elastic 
       - rabbitmq      
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5 
+    cpus: 0.2 
   
   grafana:
     image: grafana/grafana:6.7.2
@@ -301,9 +301,9 @@ services:
       - rabbitmq   
       - prometheus      
       
-    mem_limit: 512m
+    mem_limit: 256m
     mem_reservation: 128M
-    cpus: 0.5 
+    cpus: 0.2 
 
  
     
