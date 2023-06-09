@@ -420,9 +420,9 @@ services:
   #--- FRONT END ACCEPTED (BY CORS)-------------------
   web:
     container_name: smp_web
-    image: denitiawan/springboot-microservices-web:latest-prod
+    image: denitiawan/springboot-microservices-web:latest
     ports:      
-      - 80:3000       
+      - 3006:3000       
     networks:
       
       - network
@@ -447,7 +447,7 @@ services:
   #--- FRONT END BLOCKED (BY CORS)-------------------
   web_3007:
     container_name: smp_web_3007
-    image: denitiawan/springboot-microservices-web:latest-prod
+    image: denitiawan/springboot-microservices-web:latest
     ports:      
       - 3007:3000       
     networks:
