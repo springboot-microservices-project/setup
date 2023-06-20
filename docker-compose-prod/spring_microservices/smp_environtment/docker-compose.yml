@@ -1,0 +1,327 @@
+version: '3'
+
+services:
+
+ # add jenkins service
+ 
+ 
+ 
+  #-----------------------------------------
+  #-- DB START -----------------------------
+  #----------------------------------------- 
+  
+  # use for auth-service
+  db_auth:
+    container_name: 'db_auth'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_auth'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3310
+    ports:
+      - 3310:3310
+    expose:
+      - '3310'
+    volumes:
+      - mysql_bkp_auth:/var/lib/mysql
+    networks:
+      - network      
+    
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1  
+      
+      
+  # use for master-service
+  db_master:
+    container_name: 'db_master'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_master'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3311
+    ports:
+      - 3311:3311
+    expose:
+      - '3311'
+    volumes:
+      - mysql_bkp_master:/var/lib/mysql
+    networks:
+      - network
+      
+    depends_on:
+    - db_auth
+     
+    
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1  
+  
+      
+       
+  # use for trans-service
+  db_trans:
+    container_name: 'db_trans'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_transaction'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3312
+    ports:
+      - 3312:3312
+    expose:
+      - '3312'
+    volumes:
+      - mysql_bkp_trans:/var/lib/mysql
+    networks:
+      - network  
+      
+    depends_on:
+      - db_master  
+      
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1   
+      
+    # use for inventory-service
+  db_inventory:
+    container_name: 'db_inventory'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_inventory'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3313
+    ports:
+      - 3313:3313
+    expose:
+      - '3313'
+    volumes:
+      - mysql_bkp_inventory:/var/lib/mysql
+    networks:
+      - network      
+      
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1    
+       
+  # use for report-service
+  db_report:
+    container_name: 'db_report'
+    image: mysql:5.7    
+    environment:
+      MYSQL_DATABASE: 'db_report'      
+      MYSQL_USER: 'user'      
+      MYSQL_PASSWORD: 'password'      
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3314
+    ports:
+      - 3314:3314
+    expose:
+      - '3314'
+    volumes:
+      - mysql_bkp_report:/var/lib/mysql
+    networks:
+      - network
+
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory       
+      
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1    
+  
+                 
+
+       
+  # use for gateway-service       
+  redis:
+    container_name: 'redis'
+    image: redis:6.2-alpine                      
+    environment:
+      REDIS_PWD: 'password123'
+     # REDIS_HOSTS: local:redis:6380
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"  
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_PWD"
+    volumes:
+      - redis:/data
+    networks:
+      - network
+
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report      
+      
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1   
+      
+       
+  # use for schproduct-service & schtransaction-service
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+    container_name: elastic_single_node
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+      - xpack.security.enabled=false
+      #- ELASTIC_USERNAME=user
+      #- ELASTIC_PASSWORD=password
+      #- xpack.security.enabled=true
+    ports:
+      - "9200:9200"
+    volumes:
+      - elastic_bkp_data:/usr/share/elasticsearch/data
+    networks:
+      - network  
+      
+      
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis    
+    
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1   
+      
+  #-----------------------------------------
+  #-- DB END -----------------------------
+  #-----------------------------------------        
+      
+  # RABBIT MQ
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672        
+    environment:
+        - RABBITMQ_DEFAULT_USER:guest
+        - RABBITMQ_DEFAULT_PASS:guest
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - network   
+        
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis
+      - elastic      
+        
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1     
+    
+    
+    
+  #------------------------------------------
+  #-- MONITORING START ----------------------
+  #------------------------------------------
+  
+        
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    container_name: prometheus   
+    volumes:
+        - ./prometheus:/etc/prometheus
+        #- prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'   
+    ports:      
+      - 9090:9090
+    networks:
+      
+      - network
+      
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis
+      - elastic 
+      - rabbitmq      
+      
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1 
+  
+  grafana:
+    image: grafana/grafana:6.7.2
+    container_name: grafana
+    volumes:
+      #- grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    #environment:
+      #- GF_SECURITY_ADMIN_USER=admin
+      #- GF_SECURITY_ADMIN_PASSWORD=admin
+      #- GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    networks:
+      - network
+
+
+    depends_on:
+      - db_auth
+      - db_master
+      - db_inventory
+      - db_report
+      - redis
+      - elastic 
+      - rabbitmq   
+      - prometheus      
+      
+    mem_limit: 256m
+    mem_reservation: 128M
+    cpus: 0.1 
+
+ 
+    
+             
+      
+networks:
+  network:
+    driver: bridge
+    
+    
+volumes:  
+  mysql_bkp_auth:
+  mysql_bkp_master: 
+  mysql_bkp_trans:
+  mysql_bkp_inventory:
+  mysql_bkp_report:
+  elastic_bkp_data:
+  redis:
+    driver: local   
+    
+  
